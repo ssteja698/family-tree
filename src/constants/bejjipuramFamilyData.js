@@ -219,7 +219,7 @@ const ramalakshmiFamily = {
   ],
 };
 
-export const family = {
+export const bejjipuramFamily = {
   name: "Sanyasi Naidu Bejjipuram",
   spouse: "Varahalamma B",
   isMale: true,

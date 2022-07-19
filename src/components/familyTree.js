@@ -1,5 +1,6 @@
 import React, { useState } from "react";
-import { family } from "../constants/familyData";
+import { bejjipuramFamily } from "../constants/bejjipuramFamilyData";
+import { babbadiFamily } from "../constants/babbadiFamilyData";
 
 function generateNewColor() {
   var letters = "0123456789ABCDEF";
@@ -41,6 +42,10 @@ function invertColor(hex, bw) {
 const DisplayFamilyTree = ({ family, familyColors, color = null }) => {
   const [isOpen, setIsOpen] = useState(false);
 
+  const showName = ({ childNo, name }) => {
+    return childNo ? `${childNo}. ${name}` : name;
+  };
+
   const familyColor =
     familyColors[`${family.name}${family.spouse}`] ||
     familyColors[`${family.spouse}${family.name}`] ||
@@ -68,7 +73,7 @@ const DisplayFamilyTree = ({ family, familyColors, color = null }) => {
         }}
       >
         <h4 style={{ padding: 0, margin: 0 }}>
-          {family.childNo} {family.name}
+          {showName({ childNo: family.childNo, name: family.name })}
         </h4>
         {family?.spouse && <div>{family?.spouse}</div>}
         <div style={{ display: "flex", margin: 10 }}>
@@ -76,7 +81,7 @@ const DisplayFamilyTree = ({ family, familyColors, color = null }) => {
             .sort((first, second) => first.childNo - second.childNo)
             .map((child, index, children) => (
               <div
-                key={child.name}
+                key={`${child.name}_${child.spouse}`}
                 style={{
                   marginRight: index !== children.length - 1 ? "20px" : 0,
                 }}
@@ -89,6 +94,18 @@ const DisplayFamilyTree = ({ family, familyColors, color = null }) => {
               </div>
             ))}
         </div>
+        <button
+          style={{
+            height: 30,
+            marginTop: 5,
+            cursor: "pointer",
+            border: "none",
+            borderRadius: 10,
+          }}
+          onClick={() => setIsOpen((isOpen) => !isOpen)}
+        >
+          Hide Family
+        </button>
       </div>
     );
   }
@@ -96,19 +113,23 @@ const DisplayFamilyTree = ({ family, familyColors, color = null }) => {
     <div>
       {family.spouse ? (
         <h4 style={{ padding: 0, margin: 0 }}>
-          {family.childNo} {family.name}
+          {showName({ childNo: family.childNo, name: family.name })}
         </h4>
       ) : (
-        <div>
-          {family.childNo} {family.name}
-        </div>
+        <div>{showName({ childNo: family.childNo, name: family.name })}</div>
       )}
       {family?.spouse && (!family.children || !family.children.length) && (
         <div>{family?.spouse}</div>
       )}
       {family.children?.length && (
         <button
-          style={{ height: 30, marginTop: 5, cursor: "pointer" }}
+          style={{
+            height: 30,
+            marginTop: 5,
+            cursor: "pointer",
+            border: "none",
+            borderRadius: 10,
+          }}
           onClick={() => setIsOpen((isOpen) => !isOpen)}
         >
           Show Family
@@ -120,10 +141,57 @@ const DisplayFamilyTree = ({ family, familyColors, color = null }) => {
 
 const FamilyTree = () => {
   const familyColors = {};
+  const [showBejjipuramFamily, setShowBejjipuramFamily] = useState(false);
+  const [showBabbadiFamily, setShowBabbadiFamily] = useState(false);
 
   return (
-    <div>
-      <DisplayFamilyTree family={family} familyColors={familyColors} />
+    <div style={{ marginTop: 10 }}>
+      <button
+        style={{
+          height: 30,
+          marginRight: 10,
+          cursor: "pointer",
+          border: "none",
+          borderRadius: 10,
+        }}
+        onClick={() =>
+          setShowBejjipuramFamily((showBejjipuramFamily) => {
+            if (!showBejjipuramFamily) {
+              setShowBabbadiFamily(false);
+            }
+            return !showBejjipuramFamily;
+          })
+        }
+      >
+        {showBejjipuramFamily ? "Hide" : "Show"} Bejjipuram Family
+      </button>
+      <button
+        style={{
+          height: 30,
+          cursor: "pointer",
+          border: "none",
+          borderRadius: 10,
+        }}
+        onClick={() =>
+          setShowBabbadiFamily((showBabbadiFamily) => {
+            if (!showBabbadiFamily) {
+              setShowBejjipuramFamily(false);
+            }
+            return !showBabbadiFamily;
+          })
+        }
+      >
+        {showBabbadiFamily ? "Hide" : "Show"} Babbadi Family
+      </button>
+
+      {(showBabbadiFamily || showBejjipuramFamily) && (
+        <div style={{ marginTop: 15 }}>
+          <DisplayFamilyTree
+            family={showBabbadiFamily ? babbadiFamily : bejjipuramFamily}
+            familyColors={familyColors}
+          />
+        </div>
+      )}
     </div>
   );
 };
