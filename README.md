@@ -1,3 +1,3 @@
 ## My Family Tree
 
-This is a repo where I represented my entire family as a tree. Happy about the same.
+This is a repo where I represented my entire family as a tree.

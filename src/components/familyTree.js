@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { bejjipuramFamily } from "../constants/bejjipuramFamilyData";
 import { babbadiFamily } from "../constants/babbadiFamilyData";
+import "./familyTree.css";
 
 function generateNewColor() {
   var letters = "0123456789ABCDEF";
@@ -58,50 +59,63 @@ const DisplayFamilyTree = ({ family, familyColors, color = null }) => {
     const nameColor = invertColor(familyColor, true);
     return (
       <div
+        className="d-flex flex-column align-items-center m-auto p-2 rounded-3 text-nowrap overflow-auto"
         style={{
-          display: "flex",
-          flexDirection: "column",
           width: "fit-content",
-          margin: "auto",
-          border: `1px solid ${nameColor}`,
-          overflow: "auto",
-          whiteSpace: "nowrap",
+          border: `2px solid ${nameColor}`,
           backgroundColor: familyColor,
           color: nameColor,
-          padding: 10,
-          borderRadius: 15,
         }}
       >
-        <h4 style={{ padding: 0, margin: 0 }}>
+        <h4 className="p-0 m-0">
           {showName({ childNo: family.childNo, name: family.name })}
         </h4>
-        {family?.spouse && <div>{family?.spouse}</div>}
-        <div style={{ display: "flex", margin: 10 }}>
+        {family?.spouse && <h5>{family?.spouse}</h5>}
+        <div
+          style={{
+            height: 20,
+            width: 2,
+            background: nameColor,
+          }}
+        ></div>
+        <div
+          className="d-flex"
+          style={{
+            borderTop: `2px solid ${nameColor}`,
+          }}
+        >
           {family.children
             .sort((first, second) => first.childNo - second.childNo)
             .map((child, index, children) => (
-              <div
-                key={`${child.name}_${child.spouse}`}
-                style={{
-                  marginRight: index !== children.length - 1 ? "20px" : 0,
-                }}
-              >
-                <DisplayFamilyTree
-                  family={child}
-                  color={child.isMale ? familyColor : null}
-                  familyColors={familyColors}
-                />
+              <div className="d-flex flex-column align-items-center">
+                <div
+                  style={{
+                    height: 20,
+                    width: 2,
+                    background: nameColor,
+                  }}
+                ></div>
+                <div
+                  className="familyTree__triangleDown"
+                  style={{
+                    borderTop: `8px solid ${nameColor}`,
+                  }}
+                ></div>
+                <div
+                  key={`${child.name}_${child.spouse}`}
+                  className={index === children.length - 1 ? "" : "me-3"}
+                >
+                  <DisplayFamilyTree
+                    family={child}
+                    color={child.isMale ? familyColor : null}
+                    familyColors={familyColors}
+                  />
+                </div>
               </div>
             ))}
         </div>
         <button
-          style={{
-            height: 30,
-            marginTop: 5,
-            cursor: "pointer",
-            border: "none",
-            borderRadius: 10,
-          }}
+          className="mt-3 cursor-pointer border-0 rounded-3"
           onClick={() => setIsOpen((isOpen) => !isOpen)}
         >
           Hide Family
@@ -111,25 +125,19 @@ const DisplayFamilyTree = ({ family, familyColors, color = null }) => {
   }
   return (
     <div>
-      {family.spouse ? (
-        <h4 style={{ padding: 0, margin: 0 }}>
+      {family.spouse || family.children?.length ? (
+        <h4 className="p-0 m-0">
           {showName({ childNo: family.childNo, name: family.name })}
         </h4>
       ) : (
         <div>{showName({ childNo: family.childNo, name: family.name })}</div>
       )}
       {family?.spouse && (!family.children || !family.children.length) && (
-        <div>{family?.spouse}</div>
+        <h5>{family?.spouse}</h5>
       )}
       {family.children?.length && (
         <button
-          style={{
-            height: 30,
-            marginTop: 5,
-            cursor: "pointer",
-            border: "none",
-            borderRadius: 10,
-          }}
+          className="mt-1 p-1 px-2 cursor-pointer border-0 rounded-3"
           onClick={() => setIsOpen((isOpen) => !isOpen)}
         >
           Show Family
@@ -145,15 +153,9 @@ const FamilyTree = () => {
   const [showBabbadiFamily, setShowBabbadiFamily] = useState(false);
 
   return (
-    <div style={{ marginTop: 10 }}>
+    <div className="mt-2">
       <button
-        style={{
-          height: 30,
-          marginRight: 10,
-          cursor: "pointer",
-          border: "none",
-          borderRadius: 10,
-        }}
+        className="mt-2 me-3 p-1 px-2 cursor-pointer border-0 rounded-3"
         onClick={() =>
           setShowBejjipuramFamily((showBejjipuramFamily) => {
             if (!showBejjipuramFamily) {
@@ -166,12 +168,7 @@ const FamilyTree = () => {
         {showBejjipuramFamily ? "Hide" : "Show"} Bejjipuram Family
       </button>
       <button
-        style={{
-          height: 30,
-          cursor: "pointer",
-          border: "none",
-          borderRadius: 10,
-        }}
+        className="p-1 px-2 cursor-pointer border-0 rounded-3"
         onClick={() =>
           setShowBabbadiFamily((showBabbadiFamily) => {
             if (!showBabbadiFamily) {
@@ -185,7 +182,7 @@ const FamilyTree = () => {
       </button>
 
       {(showBabbadiFamily || showBejjipuramFamily) && (
-        <div style={{ marginTop: 15 }}>
+        <div className="mt-3">
           <DisplayFamilyTree
             family={showBabbadiFamily ? babbadiFamily : bejjipuramFamily}
             familyColors={familyColors}
