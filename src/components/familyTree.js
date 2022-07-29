@@ -1,6 +1,4 @@
-import React, { useState } from "react";
-import { bejjipuramFamily } from "../constants/bejjipuramFamilyData";
-import { babbadiFamily } from "../constants/babbadiFamilyData";
+import React, { useState, useEffect } from "react";
 import "./familyTree.css";
 
 function generateNewColor() {
@@ -40,11 +38,65 @@ function invertColor(hex, bw) {
   return "#" + padZero(r) + padZero(g) + padZero(b);
 }
 
-const DisplayFamilyTree = ({ family, familyColors, color = null }) => {
-  const [isOpen, setIsOpen] = useState(false);
+async function postData(url = "", data = {}) {
+  // Default options are marked with *
+  const response = await fetch(url, {
+    method: "POST", // *GET, POST, PUT, DELETE, etc.
+    mode: "cors", // no-cors, *cors, same-origin
+    cache: "no-cache", // *default, no-cache, reload, force-cache, only-if-cached
+    credentials: "same-origin", // include, *same-origin, omit
+    headers: {
+      "Content-Type": "application/json",
+      // 'Content-Type': 'application/x-www-form-urlencoded',
+    },
+    redirect: "follow", // manual, *follow, error
+    referrerPolicy: "no-referrer", // no-referrer, *no-referrer-when-downgrade, origin, origin-when-cross-origin, same-origin, strict-origin, strict-origin-when-cross-origin, unsafe-url
+    body: JSON.stringify(data), // body data type must match "Content-Type" header
+  });
+  return response.json(); // parses JSON response into native JavaScript objects
+}
+
+const DisplayFamilyTree = ({
+  family,
+  familyColors,
+  color = null,
+  showBabbadiFamily,
+  babbadiFamily,
+  bejjipuramFamily,
+  setBabbadiFamily,
+  setBejjipuramFamily,
+}) => {
+  const [isOpen, setIsOpen] = useState(true);
 
   const showName = ({ childNo, name }) => {
     return childNo ? `${childNo}. ${name}` : name;
+  };
+
+  const modifyCurrFamily = ({ currFamily, mainFamily, newChild }) => {
+    if (
+      currFamily.name === mainFamily.name &&
+      currFamily.spouse === mainFamily.spouse &&
+      currFamily.childNo === mainFamily.childNo &&
+      currFamily.children?.length === mainFamily.children?.length
+    ) {
+      mainFamily.children.push(newChild);
+      return mainFamily.children;
+    }
+
+    if (mainFamily.children) {
+      for (let child of mainFamily.children) {
+        let finalCurrFamily = modifyCurrFamily({
+          currFamily,
+          mainFamily: child,
+          newChild,
+        });
+        if (finalCurrFamily) {
+          return finalCurrFamily;
+        }
+      }
+    }
+
+    return null;
   };
 
   const familyColor =
@@ -79,6 +131,48 @@ const DisplayFamilyTree = ({ family, familyColors, color = null }) => {
           }}
         ></div>
         <div
+          style={{ cursor: "pointer" }}
+          onClick={async () => {
+            const mainFamily = showBabbadiFamily
+              ? { ...babbadiFamily }
+              : { ...bejjipuramFamily };
+
+            modifyCurrFamily({
+              currFamily: family,
+              mainFamily,
+              newChild: {
+                name: "bro",
+                spouse: "bro",
+                isMale: true,
+                children: null,
+                childNo: family.children.length + 1,
+              },
+            });
+
+            await postData(
+              `http://localhost:4000/${
+                showBabbadiFamily ? "babbadiFamily" : "bejjipuramFamily"
+              }`,
+              mainFamily
+            );
+
+            const newFamilyResp = await fetch(
+              `http://localhost:4000/${
+                showBabbadiFamily ? "babbadiFamily" : "bejjipuramFamily"
+              }`
+            );
+            const newFamily = await newFamilyResp.json();
+
+            if (showBabbadiFamily) {
+              setBabbadiFamily(newFamily);
+            } else {
+              setBejjipuramFamily(newFamily);
+            }
+          }}
+        >
+          <i className="fa fa-plus" aria-hidden="true"></i>
+        </div>
+        <div
           className="d-flex"
           style={{
             borderTop: `2px solid ${nameColor}`,
@@ -87,7 +181,10 @@ const DisplayFamilyTree = ({ family, familyColors, color = null }) => {
           {family.children
             .sort((first, second) => first.childNo - second.childNo)
             .map((child, index, children) => (
-              <div className="d-flex flex-column align-items-center">
+              <div
+                key={`${child.childNo}--${child.name}--${child.spouse}--${child.children?.length}`}
+                className="d-flex flex-column align-items-center"
+              >
                 <div
                   style={{
                     height: 20,
@@ -109,6 +206,11 @@ const DisplayFamilyTree = ({ family, familyColors, color = null }) => {
                     family={child}
                     color={child.isMale ? familyColor : null}
                     familyColors={familyColors}
+                    showBabbadiFamily={showBabbadiFamily}
+                    babbadiFamily={babbadiFamily}
+                    bejjipuramFamily={bejjipuramFamily}
+                    setBabbadiFamily={setBabbadiFamily}
+                    setBejjipuramFamily={setBejjipuramFamily}
                   />
                 </div>
               </div>
@@ -149,8 +251,24 @@ const DisplayFamilyTree = ({ family, familyColors, color = null }) => {
 
 const FamilyTree = () => {
   const familyColors = {};
+  const [bejjipuramFamily, setBejjipuramFamily] = useState({});
+  const [babbadiFamily, setBabbadiFamily] = useState({});
   const [showBejjipuramFamily, setShowBejjipuramFamily] = useState(false);
   const [showBabbadiFamily, setShowBabbadiFamily] = useState(false);
+
+  useEffect(() => {
+    fetch("http://localhost:4000/bejjipuramFamily")
+      .then((res) => res.json())
+      .then((data) => {
+        setBejjipuramFamily(data);
+      });
+
+    fetch("http://localhost:4000/babbadiFamily")
+      .then((res) => res.json())
+      .then((data) => {
+        setBabbadiFamily(data);
+      });
+  }, []);
 
   return (
     <div className="mt-2">
@@ -186,6 +304,11 @@ const FamilyTree = () => {
           <DisplayFamilyTree
             family={showBabbadiFamily ? babbadiFamily : bejjipuramFamily}
             familyColors={familyColors}
+            showBabbadiFamily={showBabbadiFamily}
+            babbadiFamily={babbadiFamily}
+            bejjipuramFamily={bejjipuramFamily}
+            setBabbadiFamily={setBabbadiFamily}
+            setBejjipuramFamily={setBejjipuramFamily}
           />
         </div>
       )}
