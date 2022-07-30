@@ -1,7 +1,14 @@
 import React, { useRef } from "react";
 import "./styles.css";
 
-const Modal = ({ show, title = "Modal title", footer, children, onClose }) => {
+const Modal = ({
+  show,
+  title = "Modal title",
+  footer,
+  children,
+  onClose,
+  width,
+}) => {
   const modalContentRef = useRef(null);
 
   const handleContainerClick = (e) => {
@@ -19,7 +26,7 @@ const Modal = ({ show, title = "Modal title", footer, children, onClose }) => {
       className="Modal d-flex flex-column justify-content-center align-items-center"
       onClick={handleContainerClick}
     >
-      <div ref={modalContentRef} className="modal__content">
+      <div ref={modalContentRef} className="modal__content" style={{ width }}>
         <div className="modal__header">
           <h4 className="modal__title">{title}</h4>
           {onClose && (

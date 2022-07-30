@@ -35,10 +35,11 @@ const FamilyTree = () => {
 
   const renderInput = ({ id, fieldName }) => {
     return (
-      <div className="d-flex mb-2">
-        <label className="me-2" htmlFor={id}>
-          {capitalize(fieldName)}:
-        </label>
+      <div
+        className="d-flex justify-content-between mb-2"
+        style={{ width: "55%" }}
+      >
+        <label htmlFor={id}>{capitalize(fieldName)}:</label>
         <input
           id={id}
           value={newChildDetails[fieldName]}
@@ -57,6 +58,7 @@ const FamilyTree = () => {
     return (
       <div
         className="d-flex align-items-center"
+        style={{ width: "55%" }}
         onChange={(e) =>
           setNewChildDetails((newChildDetails) => ({
             ...newChildDetails,
@@ -83,6 +85,42 @@ const FamilyTree = () => {
           value="Female"
         />
         <label htmlFor="gender2">Female</label>
+      </div>
+    );
+  };
+
+  const modalBody = () => {
+    if (
+      currFamily?.children?.length > 0 &&
+      newChildDetails.childNo !== currFamily.children.length + 1
+    ) {
+      setNewChildDetails((newChildDetails) => ({
+        ...newChildDetails,
+        childNo: currFamily.children.length + 1,
+      }));
+    }
+
+    return (
+      <div className="d-flex flex-column justify-content-center align-items-center">
+        {renderInput({ id: "childName", fieldName: "name" })}
+        {renderInput({ id: "childSpouse", fieldName: "spouse" })}
+        {renderGender()}
+        <div className="d-flex justify-content-end mt-3">
+          <button
+            className="btn btn-primary me-2"
+            style={{ width: 100 }}
+            onClick={onAddBtnClick}
+          >
+            Add
+          </button>
+          <button
+            className="btn btn-secondary"
+            style={{ width: 100 }}
+            onClick={() => setShowAddChildModal(false)}
+          >
+            Cancel
+          </button>
+        </div>
       </div>
     );
   };
@@ -151,37 +189,6 @@ const FamilyTree = () => {
     }
   };
 
-  const modalBody = () => {
-    if (
-      currFamily?.children?.length > 0 &&
-      newChildDetails.childNo !== currFamily.children.length + 1
-    ) {
-      setNewChildDetails((newChildDetails) => ({
-        ...newChildDetails,
-        childNo: currFamily.children.length + 1,
-      }));
-    }
-
-    return (
-      <div className="d-flex flex-column justify-content-center align-items-center">
-        {renderInput({ id: "childName", fieldName: "name" })}
-        {renderInput({ id: "childSpouse", fieldName: "spouse" })}
-        {renderGender()}
-        <div className="d-flex mt-3">
-          <button className="btn btn-primary me-2" onClick={onAddBtnClick}>
-            Add
-          </button>
-          <button
-            className="btn btn-secondary"
-            onClick={() => setShowAddChildModal(false)}
-          >
-            Cancel
-          </button>
-        </div>
-      </div>
-    );
-  };
-
   return (
     <div className="mt-2">
       <button
@@ -225,6 +232,7 @@ const FamilyTree = () => {
         show={showAddChildModal}
         onClose={() => setShowAddChildModal(false)}
         title="Add Child into this family"
+        width={480}
       >
         {modalBody()}
       </Modal>
