@@ -14,7 +14,7 @@ const FamilyTree = () => {
   const [newChildDetails, setNewChildDetails] = useState({
     name: "",
     spouse: "",
-    isMale: true,
+    isMale: null,
     children: null,
     childNo: 1,
   });
@@ -116,6 +116,11 @@ const FamilyTree = () => {
   };
 
   const onAddBtnClick = async () => {
+    if (!newChildDetails.name || newChildDetails.isMale === null) {
+      alert("A child should have both name and gender");
+      return;
+    }
+
     const mainFamily = showBabbadiFamily
       ? { ...babbadiFamily }
       : { ...bejjipuramFamily };
