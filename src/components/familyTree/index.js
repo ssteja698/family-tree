@@ -187,6 +187,14 @@ const FamilyTree = () => {
     } else {
       setBejjipuramFamily(newFamily);
     }
+
+    setNewChildDetails({
+      name: "",
+      spouse: "",
+      isMale: null,
+      children: null,
+      childNo: 1,
+    });
   };
 
   return (
