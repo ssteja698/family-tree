@@ -16,6 +16,10 @@ export async function postData(url = "", data = {}) {
   return response.json(); // parses JSON response into native JavaScript objects
 }
 
+export const capitalize = (str) => {
+  return str[0].toLocaleUpperCase() + str.slice(1);
+};
+
 export function generateNewColor() {
   var letters = "0123456789ABCDEF";
   var color = "#";

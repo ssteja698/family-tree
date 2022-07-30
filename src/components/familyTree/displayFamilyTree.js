@@ -1,48 +1,19 @@
 import React, { useState } from "react";
-import { generateNewColor, invertColor, postData } from "../utils/helper";
+import { generateNewColor, invertColor } from "../utils/helper";
 import "./styles.css";
 
 const DisplayFamilyTree = ({
   family,
+  setCurrFamily,
   familyColors,
   color = null,
-  showBabbadiFamily,
-  babbadiFamily,
-  bejjipuramFamily,
-  setBabbadiFamily,
-  setBejjipuramFamily,
+  setShowAddChildModal,
 }) => {
   const [isOpen, setIsOpen] = useState(true);
+  const [showAddBtnForLeaf, setShowAddBtnForLeaf] = useState(false);
 
   const showName = ({ childNo, name }) => {
     return childNo ? `${childNo}. ${name}` : name;
-  };
-
-  const modifyCurrFamily = ({ currFamily, mainFamily, newChild }) => {
-    if (
-      currFamily.name === mainFamily.name &&
-      currFamily.spouse === mainFamily.spouse &&
-      currFamily.childNo === mainFamily.childNo &&
-      currFamily.children?.length === mainFamily.children?.length
-    ) {
-      mainFamily.children.push(newChild);
-      return mainFamily.children;
-    }
-
-    if (mainFamily.children) {
-      for (let child of mainFamily.children) {
-        let finalCurrFamily = modifyCurrFamily({
-          currFamily,
-          mainFamily: child,
-          newChild,
-        });
-        if (finalCurrFamily) {
-          return finalCurrFamily;
-        }
-      }
-    }
-
-    return null;
   };
 
   const familyColor =
@@ -52,6 +23,31 @@ const DisplayFamilyTree = ({
     generateNewColor();
 
   familyColors[`${family.name}${family.spouse}`] = familyColor;
+
+  const renderAddBtn = ({ nameColor }) => {
+    return (
+      <>
+        <div
+          className="d-flex justify-content-center align-items-center familyTree__addBtn"
+          style={{
+            width: 20,
+            height: 20,
+            cursor: "pointer",
+            border: `2px solid ${nameColor}`,
+            borderRadius: "50%",
+            position: "relative",
+          }}
+          onClick={() => {
+            setCurrFamily(family);
+            setShowAddChildModal(true);
+          }}
+        >
+          <i className="fa fa-plus" aria-hidden="true"></i>
+        </div>
+        <div className="tooltipDiv">Add a child</div>
+      </>
+    );
+  };
 
   if (isOpen && family.children?.length) {
     const nameColor = invertColor(familyColor, true);
@@ -63,6 +59,7 @@ const DisplayFamilyTree = ({
           border: `2px solid ${nameColor}`,
           backgroundColor: familyColor,
           color: nameColor,
+          position: "relative",
         }}
       >
         <h4 className="p-0 m-0">
@@ -76,48 +73,7 @@ const DisplayFamilyTree = ({
             background: nameColor,
           }}
         ></div>
-        <div
-          style={{ cursor: "pointer" }}
-          onClick={async () => {
-            const mainFamily = showBabbadiFamily
-              ? { ...babbadiFamily }
-              : { ...bejjipuramFamily };
-
-            modifyCurrFamily({
-              currFamily: family,
-              mainFamily,
-              newChild: {
-                name: "bro",
-                spouse: "bro",
-                isMale: true,
-                children: null,
-                childNo: family.children.length + 1,
-              },
-            });
-
-            await postData(
-              `http://localhost:4000/${
-                showBabbadiFamily ? "babbadiFamily" : "bejjipuramFamily"
-              }`,
-              mainFamily
-            );
-
-            const newFamilyResp = await fetch(
-              `http://localhost:4000/${
-                showBabbadiFamily ? "babbadiFamily" : "bejjipuramFamily"
-              }`
-            );
-            const newFamily = await newFamilyResp.json();
-
-            if (showBabbadiFamily) {
-              setBabbadiFamily(newFamily);
-            } else {
-              setBejjipuramFamily(newFamily);
-            }
-          }}
-        >
-          <i className="fa fa-plus" aria-hidden="true"></i>
-        </div>
+        {renderAddBtn({ nameColor })}
         <div
           className="d-flex"
           style={{
@@ -150,13 +106,10 @@ const DisplayFamilyTree = ({
                 >
                   <DisplayFamilyTree
                     family={child}
+                    setCurrFamily={setCurrFamily}
                     color={child.isMale ? familyColor : null}
                     familyColors={familyColors}
-                    showBabbadiFamily={showBabbadiFamily}
-                    babbadiFamily={babbadiFamily}
-                    bejjipuramFamily={bejjipuramFamily}
-                    setBabbadiFamily={setBabbadiFamily}
-                    setBejjipuramFamily={setBejjipuramFamily}
+                    setShowAddChildModal={setShowAddChildModal}
                   />
                 </div>
               </div>
@@ -172,7 +125,18 @@ const DisplayFamilyTree = ({
     );
   }
   return (
-    <div>
+    <div
+      className="d-flex flex-column justify-content-center align-items-center"
+      style={{ position: "relative" }}
+      onMouseEnter={() => {
+        if (family.spouse && !family.children?.length) {
+          setShowAddBtnForLeaf(true);
+        }
+      }}
+      onMouseLeave={() => {
+        if (showAddBtnForLeaf) setShowAddBtnForLeaf(false);
+      }}
+    >
       {family.spouse || family.children?.length ? (
         <h4 className="p-0 m-0">
           {showName({ childNo: family.childNo, name: family.name })}
@@ -183,6 +147,7 @@ const DisplayFamilyTree = ({
       {family?.spouse && (!family.children || !family.children.length) && (
         <h5>{family?.spouse}</h5>
       )}
+      {showAddBtnForLeaf && renderAddBtn({ nameColor: "#fff" })}
       {family.children?.length && (
         <button
           className="mt-1 p-1 px-2 cursor-pointer border-0 rounded-3"
