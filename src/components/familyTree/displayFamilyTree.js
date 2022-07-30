@@ -24,7 +24,9 @@ const DisplayFamilyTree = ({
 
   familyColors[`${family.name}${family.spouse}`] = familyColor;
 
-  const renderAddBtn = ({ nameColor }) => {
+  const nameColor = invertColor(familyColor, true);
+
+  const renderAddBtn = () => {
     return (
       <>
         <div
@@ -50,7 +52,6 @@ const DisplayFamilyTree = ({
   };
 
   if (isOpen && family.children?.length) {
-    const nameColor = invertColor(familyColor, true);
     return (
       <div
         className="d-flex flex-column align-items-center m-auto p-2 rounded-3 text-nowrap overflow-auto"
@@ -73,7 +74,7 @@ const DisplayFamilyTree = ({
             background: nameColor,
           }}
         ></div>
-        {renderAddBtn({ nameColor })}
+        {renderAddBtn()}
         <div
           className="d-flex"
           style={{
@@ -147,7 +148,7 @@ const DisplayFamilyTree = ({
       {family?.spouse && (!family.children || !family.children.length) && (
         <h5>{family?.spouse}</h5>
       )}
-      {showAddBtnForLeaf && renderAddBtn({ nameColor: "#fff" })}
+      {showAddBtnForLeaf && renderAddBtn()}
       {family.children?.length && (
         <button
           className="mt-1 p-1 px-2 cursor-pointer border-0 rounded-3"
