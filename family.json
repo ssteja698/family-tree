@@ -21,15 +21,18 @@
                 "name": "Jai Prakash Naidu B",
                 "children": null,
                 "isMale": true,
-                "childNo": 1
+                "childNo": 1,
+                "color": "#2651F8"
               },
               {
                 "name": "Prudvi Naidu B",
                 "children": null,
                 "isMale": true,
-                "childNo": 2
+                "childNo": 2,
+                "color": "#2651F8"
               }
-            ]
+            ],
+            "color": "#2651F8"
           },
           {
             "name": "Aruna",
@@ -41,24 +44,29 @@
                 "name": "Hitanvi",
                 "isMale": false,
                 "children": null,
-                "childNo": 1
+                "childNo": 1,
+                "color": "#588DD2"
               },
               {
                 "name": "Vedanvi",
                 "isMale": false,
                 "children": null,
-                "childNo": 2
+                "childNo": 2,
+                "color": "#8CAA61"
               }
-            ]
+            ],
+            "color": "#19D65B"
           },
           {
             "name": "Venkatesh V",
             "spouse": "Ramya V",
             "isMale": true,
             "children": null,
-            "childNo": 3
+            "childNo": 3,
+            "color": "#D45F38"
           }
-        ]
+        ],
+        "color": "#D45F38"
       },
       {
         "name": "Leelaveni Kuriti",
@@ -76,17 +84,21 @@
                 "name": "Sushmitha G",
                 "isMale": false,
                 "children": null,
-                "childNo": 1
+                "childNo": 1,
+                "color": "#90AA4E"
               }
-            ]
+            ],
+            "color": "#F425EB"
           },
           {
             "name": "Sai Prashanth K",
             "isMale": true,
             "children": null,
-            "childNo": 2
+            "childNo": 2,
+            "color": "#0EF51F"
           }
-        ]
+        ],
+        "color": "#0EF51F"
       },
       {
         "name": "Rambabu B",
@@ -98,15 +110,18 @@
             "name": "Sai Siva Teja B",
             "isMale": true,
             "children": null,
-            "childNo": 1
+            "childNo": 1,
+            "color": "#EF2EF3"
           },
           {
             "name": "Akhila B",
             "isMale": false,
             "children": null,
-            "childNo": 2
+            "childNo": 2,
+            "color": "#62CE79"
           }
-        ]
+        ],
+        "color": "#EF2EF3"
       },
       {
         "name": "Ramanababu B",
@@ -118,17 +133,21 @@
             "name": "Jai Prakash Naidu B",
             "isMale": true,
             "children": null,
-            "childNo": 1
+            "childNo": 1,
+            "color": "#2651F8"
           },
           {
             "name": "Prudvi Naidu B",
             "isMale": true,
             "children": null,
-            "childNo": 2
+            "childNo": 2,
+            "color": "#2651F8"
           }
-        ]
+        ],
+        "color": "#2651F8"
       }
-    ]
+    ],
+    "color": "#EF2EF3"
   },
   "babbadiFamily": {
     "name": "Babbadi Jagannadha Naidu",
@@ -151,21 +170,25 @@
                 "name": "Bhujanga Naidu",
                 "spouse": "",
                 "isMale": true,
-                "childNo": 1
+                "childNo": 1,
+                "color": "#9B636B"
               },
               {
                 "name": "Ammalu",
                 "spouse": "",
                 "isMale": false,
-                "childNo": 2
+                "childNo": 2,
+                "color": "#4F508B"
               },
               {
                 "name": "Venu",
                 "spouse": "",
                 "isMale": true,
-                "childNo": 3
+                "childNo": 3,
+                "color": "#9B636B"
               }
-            ]
+            ],
+            "color": "#9B636B"
           },
           {
             "name": "Vijaya Viyyapu",
@@ -176,14 +199,17 @@
               {
                 "name": "Hemani",
                 "spouse": "",
-                "isMale": false
+                "isMale": false,
+                "color": "#19B47F"
               },
               {
                 "name": "Harish",
                 "spouse": "",
-                "isMale": true
+                "isMale": true,
+                "color": "#2224AA"
               }
-            ]
+            ],
+            "color": "#2224AA"
           },
           {
             "name": "Hyma Mudili",
@@ -194,14 +220,17 @@
               {
                 "name": "Tarangini",
                 "isMale": false,
-                "childNo": 1
+                "childNo": 1,
+                "color": "#8CAB37"
               },
               {
                 "name": "Gowtham Bharani",
                 "isMale": true,
-                "childNo": 2
+                "childNo": 2,
+                "color": "#F4C39A"
               }
-            ]
+            ],
+            "color": "#F4C39A"
           },
           {
             "name": "Sridevi Sontyana",
@@ -212,21 +241,25 @@
               {
                 "name": "Jitendra",
                 "isMale": true,
-                "childNo": 1
+                "childNo": 1,
+                "color": "#C29CC2"
               },
               {
                 "name": "xyz",
                 "isMale": true,
-                "childNo": 2
+                "childNo": 2,
+                "color": "#C29CC2"
               }
-            ]
+            ],
+            "color": "#C29CC2"
           },
           {
             "name": "Usha",
             "spouse": "Venkata Rao",
             "isMale": false,
             "childNo": 5,
-            "children": null
+            "children": null,
+            "color": "#465915"
           },
           {
             "name": "Venkatappala Naidu",
@@ -237,16 +270,20 @@
               {
                 "name": "Pranavi",
                 "childNo": 1,
-                "isMale": false
+                "isMale": false,
+                "color": "#9B7135"
               },
               {
                 "name": "Rihansh",
                 "childNo": 2,
-                "isMale": true
+                "isMale": true,
+                "color": "#035042"
               }
-            ]
+            ],
+            "color": "#035042"
           }
-        ]
+        ],
+        "color": "#035042"
       },
       {
         "name": "Anasuyamma",
@@ -263,19 +300,23 @@
               {
                 "name": "Gowri",
                 "childNo": 1,
-                "isMale": false
+                "isMale": false,
+                "color": "#46B463"
               },
               {
                 "name": "Lalitha",
                 "childNo": 2,
-                "isMale": false
+                "isMale": false,
+                "color": "#C75574"
               },
               {
                 "name": "Chandramouli",
                 "childNo": 3,
-                "isMale": true
+                "isMale": true,
+                "color": "#50673F"
               }
-            ]
+            ],
+            "color": "#50673F"
           },
           {
             "name": "Rajya Lakshmi",
@@ -286,19 +327,23 @@
               {
                 "name": "Deepa",
                 "isMale": false,
-                "childNo": 1
+                "childNo": 1,
+                "color": "#CBC0B2"
               },
               {
                 "name": "Lavanya",
                 "isMale": false,
-                "childNo": 2
+                "childNo": 2,
+                "color": "#C60A87"
               },
               {
                 "name": "Bhagya",
                 "isMale": false,
-                "childNo": 3
+                "childNo": 3,
+                "color": "#F69B01"
               }
-            ]
+            ],
+            "color": "#977BAF"
           },
           {
             "name": "Srinivasa Rao (Baburao)",
@@ -309,16 +354,20 @@
               {
                 "name": "Tarangini",
                 "childNo": 1,
-                "isMale": false
+                "isMale": false,
+                "color": "#8CAB37"
               },
               {
                 "name": "Gowtham Bharani",
                 "childNo": 2,
-                "isMale": true
+                "isMale": true,
+                "color": "#F4C39A"
               }
-            ]
+            ],
+            "color": "#F4C39A"
           }
-        ]
+        ],
+        "color": "#AB61BF"
       },
       {
         "name": "Chandrudamma",
@@ -342,15 +391,18 @@
                     "name": "Jai Prakash Naidu B",
                     "children": null,
                     "isMale": true,
-                    "childNo": 1
+                    "childNo": 1,
+                    "color": "#2028D7"
                   },
                   {
                     "name": "Prudvi Naidu B",
                     "children": null,
                     "isMale": true,
-                    "childNo": 2
+                    "childNo": 2,
+                    "color": "#2028D7"
                   }
-                ]
+                ],
+                "color": "#2028D7"
               },
               {
                 "name": "Aruna",
@@ -362,24 +414,29 @@
                     "name": "Hitanvi",
                     "isMale": false,
                     "children": null,
-                    "childNo": 1
+                    "childNo": 1,
+                    "color": "#8ED6A7"
                   },
                   {
                     "name": "Vedanvi",
                     "isMale": false,
                     "children": null,
-                    "childNo": 2
+                    "childNo": 2,
+                    "color": "#DB388B"
                   }
-                ]
+                ],
+                "color": "#4233F9"
               },
               {
                 "name": "Venkatesh V",
                 "spouse": "Ramya V",
                 "isMale": true,
                 "children": null,
-                "childNo": 3
+                "childNo": 3,
+                "color": "#DF0D08"
               }
-            ]
+            ],
+            "color": "#DF0D08"
           },
           {
             "name": "Leelaveni Kuriti",
@@ -397,17 +454,21 @@
                     "name": "Sushmitha G",
                     "isMale": false,
                     "children": null,
-                    "childNo": 1
+                    "childNo": 1,
+                    "color": "#E3F73B"
                   }
-                ]
+                ],
+                "color": "#71793E"
               },
               {
                 "name": "Sai Prashanth K",
                 "isMale": true,
                 "children": null,
-                "childNo": 2
+                "childNo": 2,
+                "color": "#052F9D"
               }
-            ]
+            ],
+            "color": "#052F9D"
           },
           {
             "name": "Rambabu B",
@@ -419,15 +480,18 @@
                 "name": "Sai Siva Teja B",
                 "isMale": true,
                 "children": null,
-                "childNo": 1
+                "childNo": 1,
+                "color": "#4A6204"
               },
               {
                 "name": "Akhila B",
                 "isMale": false,
                 "children": null,
-                "childNo": 2
+                "childNo": 2,
+                "color": "#1099C2"
               }
-            ]
+            ],
+            "color": "#4A6204"
           },
           {
             "name": "Ramanababu B",
@@ -439,17 +503,21 @@
                 "name": "Jai Prakash Naidu B",
                 "isMale": true,
                 "children": null,
-                "childNo": 1
+                "childNo": 1,
+                "color": "#2028D7"
               },
               {
                 "name": "Prudvi Naidu B",
                 "isMale": true,
                 "children": null,
-                "childNo": 2
+                "childNo": 2,
+                "color": "#2028D7"
               }
-            ]
+            ],
+            "color": "#2028D7"
           }
-        ]
+        ],
+        "color": "#4A6204"
       },
       {
         "name": "Vanajakshi",
@@ -466,14 +534,17 @@
               {
                 "name": "Jyotsna",
                 "childNo": 1,
-                "isMale": false
+                "isMale": false,
+                "color": "#8F29BB"
               },
               {
                 "name": "Harini",
                 "childNo": 2,
-                "isMale": false
+                "isMale": false,
+                "color": "#50FE0C"
               }
-            ]
+            ],
+            "color": "#B1D278"
           },
           {
             "name": "Savitri",
@@ -484,14 +555,17 @@
               {
                 "name": "Ganesh",
                 "childNo": 1,
-                "isMale": true
+                "isMale": true,
+                "color": "#212F58"
               },
               {
                 "name": "Anusha",
                 "childNo": 2,
-                "isMale": false
+                "isMale": false,
+                "color": "#606FDD"
               }
-            ]
+            ],
+            "color": "#212F58"
           },
           {
             "name": "Chakri",
@@ -502,14 +576,17 @@
               {
                 "name": "Lava Kumar",
                 "childNo": 1,
-                "isMale": true
+                "isMale": true,
+                "color": "#B1D278"
               },
               {
                 "name": "Lahari",
                 "childNo": 2,
-                "isMale": false
+                "isMale": false,
+                "color": "#6913D7"
               }
-            ]
+            ],
+            "color": "#B1D278"
           },
           {
             "name": "Murali",
@@ -520,11 +597,14 @@
               {
                 "name": "Yaswin Naidu",
                 "childNo": 1,
-                "isMale": true
+                "isMale": true,
+                "color": "#B1D278"
               }
-            ]
+            ],
+            "color": "#B1D278"
           }
-        ]
+        ],
+        "color": "#B1D278"
       },
       {
         "name": "Pakeer Naidu",
@@ -535,20 +615,25 @@
           {
             "name": "Deepa",
             "isMale": false,
-            "childNo": 1
+            "childNo": 1,
+            "color": "#CBC0B2"
           },
           {
             "name": "Lavanya",
             "isMale": false,
-            "childNo": 2
+            "childNo": 2,
+            "color": "#C60A87"
           },
           {
             "name": "Bhagya",
             "isMale": false,
-            "childNo": 3
+            "childNo": 3,
+            "color": "#F69B01"
           }
-        ]
+        ],
+        "color": "#977BAF"
       }
-    ]
+    ],
+    "color": "#035042"
   }
 }

@@ -5,7 +5,6 @@ import "./styles.css";
 const DisplayFamilyTree = ({
   family,
   setCurrFamily,
-  familyColors,
   color = null,
   setShowAddChildModal,
 }) => {
@@ -16,13 +15,8 @@ const DisplayFamilyTree = ({
     return childNo ? `${childNo}. ${name}` : name;
   };
 
-  const familyColor =
-    familyColors[`${family.name}${family.spouse}`] ||
-    familyColors[`${family.spouse}${family.name}`] ||
-    color ||
-    generateNewColor();
-
-  familyColors[`${family.name}${family.spouse}`] = familyColor;
+  const familyColor = family.color || color || generateNewColor();
+  family.color ||= familyColor;
 
   const nameColor = invertColor(familyColor, true);
 
@@ -35,7 +29,8 @@ const DisplayFamilyTree = ({
             width: 20,
             height: 20,
             cursor: "pointer",
-            border: `2px solid ${nameColor}`,
+            background: "#000",
+            color: "#fff",
             borderRadius: "50%",
             position: "relative",
           }}
@@ -109,7 +104,6 @@ const DisplayFamilyTree = ({
                     family={child}
                     setCurrFamily={setCurrFamily}
                     color={child.isMale ? familyColor : null}
-                    familyColors={familyColors}
                     setShowAddChildModal={setShowAddChildModal}
                   />
                 </div>

@@ -4,7 +4,6 @@ import { capitalize, postData } from "../utils/helper";
 import DisplayFamilyTree from "./displayFamilyTree";
 
 const FamilyTree = () => {
-  const familyColors = {};
   const [bejjipuramFamily, setBejjipuramFamily] = useState({});
   const [babbadiFamily, setBabbadiFamily] = useState({});
   const [currFamily, setCurrFamily] = useState({});
@@ -20,13 +19,13 @@ const FamilyTree = () => {
   });
 
   useEffect(() => {
-    fetch("http://localhost:4000/bejjipuramFamily")
+    fetch("http://localhost:4005/bejjipuramFamily")
       .then((res) => res.json())
       .then((data) => {
         setBejjipuramFamily(data);
       });
 
-    fetch("http://localhost:4000/babbadiFamily")
+    fetch("http://localhost:4005/babbadiFamily")
       .then((res) => res.json())
       .then((data) => {
         setBabbadiFamily(data);
@@ -170,13 +169,13 @@ const FamilyTree = () => {
     });
 
     await postData(
-      `http://localhost:4000/${
+      `http://localhost:4005/${
         showBabbadiFamily ? "babbadiFamily" : "bejjipuramFamily"
       }`,
       mainFamily
     );
     const newFamilyResp = await fetch(
-      `http://localhost:4000/${
+      `http://localhost:4005/${
         showBabbadiFamily ? "babbadiFamily" : "bejjipuramFamily"
       }`
     );
@@ -231,7 +230,6 @@ const FamilyTree = () => {
           <DisplayFamilyTree
             family={showBabbadiFamily ? babbadiFamily : bejjipuramFamily}
             setCurrFamily={setCurrFamily}
-            familyColors={familyColors}
             setShowAddChildModal={setShowAddChildModal}
           />
         </div>
